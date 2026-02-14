@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The SMS Segment Optimizer - Developed by Priyanshu Patra</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: radial-gradient(circle at top left, #1e293b, #0f172a);
+            color: #f8fafc;
+        }
+        
+        .glass-card {
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .transition-all-300 {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Pulse animation for Unicode Badge */
+        @keyframes pulse-orange {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.4); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(249, 115, 22, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); }
+        }
+
+        .animate-pulse-warning {
+            animation: pulse-orange 2s infinite;
+        }
+
+        textarea::-webkit-scrollbar {
+            width: 8px;
+        }
+        textarea::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        textarea::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        textarea::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+
+        .focus-glow-purple:focus {
+            box-shadow: 0 0 15px rgba(192, 38, 211, 0.3);
+            border-color: #c026d3;
+        }
+        
+        .focus-glow-orange:focus {
+            box-shadow: 0 0 15px rgba(249, 115, 22, 0.3);
+            border-color: #f97316;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-2 sm:p-4">
+
+    <!-- Main Container -->
+    <!-- Adjusted padding and rounding for mobile -->
+    <div class="glass-card w-full max-w-3xl rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden mb-4 sm:mb-8">
+        
+        <!-- Header -->
+        <div class="bg-black/20 border-b border-white/5 px-5 py-4 sm:px-8 sm:py-6 flex justify-between items-center">
+            <div>
+                <h1 class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-fuchsia-400 to-purple-400 bg-clip-text text-transparent tracking-tight">
+                    SMS Optimizer
+                </h1>
+                <p class="text-[10px] sm:text-xs text-slate-400 mt-1 uppercase tracking-widest font-medium">Segment Analysis Pro</p>
+            </div>
+            <!-- Encoding Badge -->
+            <div id="encoding-badge" class="px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-fuchsia-500/10 text-fuchsia-400 border border-fuchsia-500/20 transition-all-300">
+                GSM (7-bit)
+            </div>
+        </div>
+
+        <!-- Content Area: Reduced padding on mobile (p-4) vs desktop (p-8) -->
+        <div class="p-4 sm:p-8 space-y-6 sm:space-y-8">
+
+            <!-- Top Grid: Audience & Cost -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                
+                <!-- Audience Input -->
+                <div class="flex flex-col">
+                    <label class="block text-sm font-semibold text-slate-300 mb-2 sm:mb-3 ml-1">Audience Size</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                        </div>
+                        <input type="number" id="audience-size" value="1000" min="1" 
+                            class="pl-10 sm:pl-12 block w-full rounded-xl border-slate-700 border bg-slate-900/50 text-white focus:outline-none focus-glow-purple transition-all py-3 sm:py-3.5 text-base sm:text-lg font-medium"
+                            placeholder="Recipients">
+                    </div>
+                </div>
+                
+                <!-- Cost Display Card -->
+                <div class="bg-gradient-to-br from-fuchsia-600/20 to-purple-900/10 rounded-xl sm:rounded-2xl p-4 sm:p-5 border border-fuchsia-500/20 flex flex-col justify-between">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-[10px] text-fuchsia-300 font-bold uppercase tracking-widest">Total Campaign Cost</span>
+                        <span class="text-[10px] px-2 py-0.5 bg-fuchsia-500/20 text-fuchsia-300 rounded-md font-bold">₹0.12/msg</span>
+                    </div>
+                    
+                    <div class="flex items-baseline gap-1 overflow-hidden">
+                        <span class="text-xl font-bold text-fuchsia-400">₹</span>
+                        <span id="total-cost" class="text-3xl sm:text-4xl font-black text-white tracking-tighter truncate">0.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Message Input Area -->
+            <div class="relative">
+                <div class="flex justify-between items-center mb-2 sm:mb-3">
+                    <label class="text-sm font-semibold text-slate-300 ml-1">Message Content</label>
+                    <div class="flex items-center gap-2">
+                        <span id="unicode-warning" class="hidden px-2 sm:px-2.5 py-1 rounded-lg text-[9px] sm:text-[10px] font-black bg-orange-500 text-white uppercase tracking-tighter animate-pulse-warning">
+                            Unicode Active
+                        </span>
+                        <span id="char-limit-display" class="text-[9px] sm:text-[10px] font-bold text-slate-400 bg-slate-900 border border-slate-700 px-2 py-1 rounded-lg">
+                            160 CHARS / SEG
+                        </span>
+                    </div>
+                </div>
+                
+                <textarea id="message-input" rows="6" 
+                    class="block w-full rounded-2xl border-slate-700 border bg-slate-900/80 text-white focus:outline-none focus-glow-purple p-4 sm:p-5 text-base leading-relaxed resize-none transition-all placeholder-slate-600 shadow-inner"
+                    placeholder="Type your message here..."></textarea>
+            </div>
+
+            <!-- Progress Bar Section -->
+            <div class="bg-slate-900/40 p-4 sm:p-5 rounded-2xl border border-white/5 shadow-inner">
+                <div class="flex justify-between text-[10px] sm:text-[11px] font-bold uppercase tracking-wider mb-2 sm:mb-3">
+                    <span id="chars-used-text" class="text-slate-400">0 characters</span>
+                    <span id="next-segment-text" class="text-fuchsia-400">160 to next</span>
+                </div>
+                <div class="w-full bg-slate-800 rounded-full h-3 sm:h-3.5 overflow-hidden border border-white/5">
+                    <div id="progress-bar" class="bg-fuchsia-600 h-full rounded-full transition-all-300 shadow-[0_0_10px_rgba(192,38,211,0.5)]" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Statistics Grid -->
+            <div class="grid grid-cols-3 gap-3 sm:gap-4">
+                <div class="bg-slate-900/60 p-3 sm:p-4 rounded-xl border border-white/5 text-center">
+                    <p class="text-[9px] sm:text-[10px] text-slate-500 uppercase font-black tracking-widest">Weight</p>
+                    <p id="stat-length" class="text-lg sm:text-xl font-bold text-slate-200 mt-1">0</p>
+                </div>
+                <div class="bg-slate-900/60 p-3 sm:p-4 rounded-xl border border-white/5 text-center">
+                    <p class="text-[9px] sm:text-[10px] text-slate-500 uppercase font-black tracking-widest">Segments</p>
+                    <p id="stat-segments" class="text-lg sm:text-xl font-bold text-fuchsia-400 mt-1">0</p>
+                </div>
+                <div class="bg-slate-900/60 p-3 sm:p-4 rounded-xl border border-white/5 text-center">
+                    <p class="text-[9px] sm:text-[10px] text-slate-500 uppercase font-black tracking-widest">User Cost</p>
+                    <p id="stat-cost-per-user" class="text-lg sm:text-xl font-bold text-slate-200 mt-1">₹0.00</p>
+                </div>
+            </div>
+
+        </div>
+        
+        <!-- Footer Inside Card -->
+        <div class="bg-black/20 px-5 py-4 sm:px-8 sm:py-5 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex flex-col items-center md:items-start">
+                <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">© 2026 SMS Optimizer</span>
+                <span class="text-[9px] text-slate-600 font-medium">Precision Encoding Analysis</span>
+            </div>
+            <div class="h-px w-12 bg-white/5 md:hidden"></div>
+            <div class="flex items-center gap-2">
+                <span class="text-[10px] text-slate-500 font-medium uppercase tracking-tighter">Developed by</span>
+                <span class="px-3 py-1 bg-white/5 rounded-full text-[8px] sm:text-[11px] font-bold text-fuchsia-400 border border-white/10 hover:border-fuchsia-500/50 hover:bg-fuchsia-500/5 transition-all cursor-default">
+                    Priyanshu Patra
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Outer Signature -->
+    <p class="text-[10px] sm:text-[11px] text-slate-600 font-semibold uppercase tracking-[0.3em] flex items-center gap-3">
+        <span class="w-6 sm:w-8 h-px bg-slate-800"></span>
+        Crafted for Accuracy
+        <span class="w-6 sm:w-8 h-px bg-slate-800"></span>
+    </p>
+
+    <script>
+        const messageInput = document.getElementById('message-input');
+        const audienceInput = document.getElementById('audience-size');
+        const encodingBadge = document.getElementById('encoding-badge');
+        const unicodeWarning = document.getElementById('unicode-warning');
+        const progressBar = document.getElementById('progress-bar');
+        const charsUsedText = document.getElementById('chars-used-text');
+        const nextSegmentText = document.getElementById('next-segment-text');
+        const charLimitDisplay = document.getElementById('char-limit-display');
+        
+        const statLength = document.getElementById('stat-length');
+        const statSegments = document.getElementById('stat-segments');
+        const statCostPerUser = document.getElementById('stat-cost-per-user');
+        const totalCostDisplay = document.getElementById('total-cost');
+
+        const COST_PER_SMS = 0.12;
+        const GSM_LIMIT = 160;
+        const UNICODE_LIMIT = 70;
+
+        const gsmBasicSet = new Set([
+            '@', '£', '$', '¥', 'è', 'é', 'ù', 'ì', 'ò', 'Ç', '\n', 'Ø', 'ø', '\r', 'Å', 'å',
+            'Δ', '_', 'Φ', 'Γ', 'Λ', 'Ω', 'Π', 'Ψ', 'Σ', 'Θ', 'Ξ', '\x1B', 'Æ', 'æ', 'ß', 'É',
+            ' ', '!', '"', '#', '¤', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/',
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '<', '=', '>', '?',
+            '¡', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
+            'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'Ä', 'Ö', 'Ñ', 'Ü', '§',
+            '¿', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o',
+            'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'ä', 'ö', 'ñ', 'ü', 'à'
+        ]);
+
+        const gsmExtendedSet = new Set([
+            '^', '{', '}', '\\', '[', '~', ']', '|', '€'
+        ]);
+
+        function calculateSMS() {
+            const text = messageInput.value;
+            const audience = parseInt(audienceInput.value) || 0;
+            
+            let isGsm = true;
+            let gsmTotalLength = 0;
+            
+            for (const char of text) {
+                if (gsmBasicSet.has(char)) {
+                    gsmTotalLength += 1;
+                } else if (gsmExtendedSet.has(char)) {
+                    gsmTotalLength += 2; 
+                } else {
+                    isGsm = false;
+                    break;
+                }
+            }
+
+            let weight = 0;
+            let limit = 0;
+            
+            if (isGsm) {
+                weight = gsmTotalLength;
+                limit = GSM_LIMIT;
+                updateUIState('GSM');
+            } else {
+                weight = text.length; 
+                limit = UNICODE_LIMIT;
+                updateUIState('UNICODE');
+            }
+
+            const segments = weight === 0 ? 0 : Math.ceil(weight / limit);
+            const costPerUser = segments * COST_PER_SMS;
+            const grandTotal = costPerUser * audience;
+
+            statLength.innerText = weight;
+            statSegments.innerText = segments;
+            statCostPerUser.innerText = `₹${costPerUser.toFixed(2)}`;
+            totalCostDisplay.innerText = grandTotal.toLocaleString('en-IN', { 
+                minimumFractionDigits: 2, 
+                maximumFractionDigits: 2 
+            });
+
+            updateProgressBar(weight, limit, segments, isGsm);
+        }
+
+        function updateUIState(mode) {
+            if (mode === 'GSM') {
+                encodingBadge.innerText = 'GSM (Standard)';
+                encodingBadge.className = 'px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-fuchsia-500/10 text-fuchsia-400 border border-fuchsia-500/20 transition-all-300';
+                unicodeWarning.classList.add('hidden');
+                charLimitDisplay.innerText = '160 CHARS / SEG';
+                charLimitDisplay.className = "text-[9px] sm:text-[10px] font-bold text-slate-400 bg-slate-900 border border-slate-700 px-2 py-1 rounded-lg";
+                messageInput.className = "block w-full rounded-2xl border-slate-700 border bg-slate-900/80 text-white focus:outline-none focus-glow-purple p-4 sm:p-5 text-base leading-relaxed resize-none transition-all placeholder-slate-600 shadow-inner";
+            } else {
+                encodingBadge.innerText = 'Unicode (UCS-2)';
+                encodingBadge.className = 'px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-orange-500/20 text-orange-400 border border-orange-500/30 transition-all-300 animate-pulse-warning';
+                unicodeWarning.classList.remove('hidden');
+                charLimitDisplay.innerText = '70 CHARS / SEG';
+                charLimitDisplay.className = "text-[9px] sm:text-[10px] font-bold text-orange-400 bg-orange-900/30 border border-orange-500/30 px-2 py-1 rounded-lg";
+                messageInput.className = "block w-full rounded-2xl border-orange-700/50 border bg-slate-900/80 text-white focus:outline-none focus-glow-orange p-4 sm:p-5 text-base leading-relaxed resize-none transition-all placeholder-slate-600 shadow-inner";
+            }
+        }
+
+        function updateProgressBar(weight, limit, currentSegments, isGsm) {
+            if (weight === 0) {
+                progressBar.style.width = '0%';
+                charsUsedText.innerText = `0 / ${limit}`;
+                nextSegmentText.innerText = `${limit} to next`;
+                return;
+            }
+
+            const previousSegmentsFull = (currentSegments - 1) * limit;
+            const charsInCurrentSegment = weight - previousSegmentsFull;
+            const percentage = (charsInCurrentSegment / limit) * 100;
+            const remaining = limit - charsInCurrentSegment;
+
+            progressBar.style.width = `${percentage}%`;
+            
+            if (percentage > 90) {
+                progressBar.className = 'h-full rounded-full transition-all-300 bg-red-600 shadow-[0_0_15px_rgba(220,38,38,0.6)]';
+                nextSegmentText.className = 'text-red-400 animate-pulse';
+            } else {
+                progressBar.className = isGsm 
+                    ? 'h-full rounded-full transition-all-300 bg-fuchsia-600 shadow-[0_0_10px_rgba(192,38,211,0.5)]' 
+                    : 'h-full rounded-full transition-all-300 bg-orange-500 shadow-[0_0_10px_rgba(249,115,22,0.5)]';
+                nextSegmentText.className = isGsm ? 'text-fuchsia-400' : 'text-orange-400';
+            }
+
+            charsUsedText.innerText = `${charsInCurrentSegment} / ${limit} (Part ${currentSegments})`;
+            nextSegmentText.innerText = `${remaining} left in part`;
+        }
+
+        messageInput.addEventListener('input', calculateSMS);
+        audienceInput.addEventListener('input', calculateSMS);
+        calculateSMS();
+    </script>
+</body>
+</html>
+
+
