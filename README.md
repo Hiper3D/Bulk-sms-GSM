@@ -3,6 +3,7 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![Telecom](https://img.shields.io/badge/Telecom-CPaaS-0052CC?style=for-the-badge)
+![GSM-7](https://img.shields.io/badge/Encoding-GSM--7-4CAF50?style=for-the-badge)
 
 ## 📌 Executive Overview
 The **SMS (Short Message Service - a text messaging service component of telephone, internet, and mobile device systems) Segment Optimizer** is a purpose-built, lightweight application engineered to analyze telecom text payloads in real-time. 
@@ -14,7 +15,7 @@ Architected specifically to solve a persistent routing and billing challenge wit
 
 
 ### 1. Dynamic Encoding Detection
-* **Real-Time Parsing:** The underlying logic actively scans input strings to instantly detect the required character encoding standard. It differentiates between purely standard GSM (Global System for Mobile Communications - a standard developed to describe the protocols for second-generation digital cellular networks) character sets and payloads requiring UCS-2 (2-byte Universal Character Set - a character encoding standard that uses exactly 16 bits to represent each character) encoding (triggered by emojis or regional language scripts).
+* **Real-Time Parsing:** The underlying logic actively scans input strings to instantly detect the required character encoding standard. It perfectly differentiates between purely standard GSM (Global System for Mobile Communications - a standard developed to describe the protocols for second-generation digital cellular networks) character sets and payloads requiring UCS-2 (2-byte Universal Character Set - a character encoding standard that uses exactly 16 bits to represent each character) encoding (triggered by emojis or regional language scripts).
 
 ### 2. Algorithmic Segmentation Math
 * **Cost Calculation:** The tool accurately calculates the exact number of message segments required for network transmission based on strict telecom carrier rules:
@@ -22,7 +23,7 @@ Architected specifically to solve a persistent routing and billing challenge wit
   * **Unicode Standard:** Restricts capacity to 70 characters for a standalone segment, shifting to 67 characters per segment for concatenated messages.
 
 ### 3. Enterprise Use Case: Billing Optimization
-* **Financial Impact:** In high-volume transactional or marketing deployments, a single stray Unicode character (e.g., a localized smart quote `”` instead of a standard straight quote `"`) forces the entire payload into the 70-character UCS-2 format. This silently splits a standard 160-character payload into three separate billable segments, tripling the routing cost. This optimizer proactively identifies and mitigates these costly encoding errors prior to dispatch.
+* **Financial Impact:** In high-volume transactional or marketing deployments, a single stray Unicode character (e.g., a localized smart quote `”` instead of a standard straight quote `"`) forces the entire payload into the 70-character UCS-2 format. This silently splits a standard 160-character GSM (Global System for Mobile Communications - a standard developed to describe the protocols for second-generation digital cellular networks) payload into three separate billable segments, tripling the routing cost. This optimizer proactively identifies and mitigates these costly encoding errors prior to dispatch.
 
 ## ⚙️ Deployment & Initialization
 Because this is a decoupled, client-side utility, provisioning a complex runtime environment is not required.
